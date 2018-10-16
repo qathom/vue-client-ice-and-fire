@@ -2,8 +2,8 @@ import Vue from 'vue';
 import VueProgressBar from 'vue-progressbar';
 
 const options = {
-  color: '#6610f2',
-  failedColor: '#874b4b',
+  color: '#34495e',
+  failedColor: '#e74c3c',
   thickness: '5px',
   location: 'top',
 };
