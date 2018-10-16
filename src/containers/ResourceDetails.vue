@@ -9,7 +9,13 @@
     </b-alert>
 
     <div v-if="resource">
-      <h1 v-text="resource.name"></h1>
+      <h1>
+        <b-button class="mb-2" size="sm" variant="primary" :to="{ name: 'home' }">
+          <icon class="fa-icon text-white"
+                name="arrow-left"></icon>
+        </b-button>
+        <span v-text="resource.name" />
+      </h1>
       <b-card v-for="(item, itemName) in resource" :key="itemName" :title="itemName">
         <p class="card-text" v-text="item"></p>
       </b-card>
