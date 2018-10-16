@@ -5,12 +5,18 @@ const instance = axios.create({
   baseURL: 'https://www.anapioficeandfire.com/api',
 });
 
+/*
+ * Resource types
+ */
 export const TYPES = Object.freeze({
   BOOK: 'books',
   CHARACTER: 'characters',
   HOUSE: 'houses',
 });
 
+/*
+ * "searchable" fields available in the API
+ */
 export const SEARCHABLES = {};
 
 SEARCHABLES[TYPES.BOOK] = {
@@ -39,6 +45,12 @@ SEARCHABLES[TYPES.HOUSE] = {
   hasAncestralWeapons: Boolean,
 };
 
+/**
+ * Add the resource type in a given array
+ *
+ * @param {Array} resources
+ * @param {String} type
+ */
 function addResourcesType(resources = [], type) {
   const finalResources = resources.map((resource) => {
     const r = resource;
@@ -49,6 +61,14 @@ function addResourcesType(resources = [], type) {
   return finalResources;
 }
 
+/**
+ * API call
+ * Retrieves a given resource type (for example books)
+ * with given parameters
+ *
+ * @param {String} resourceType
+ * @param {Object} params
+ */
 async function queryResource(resourceType, params = {}) {
   if (Object.values(TYPES).indexOf(resourceType) === -1) {
     throw new Error(`Unknown type ${resourceType}`);
@@ -71,6 +91,12 @@ async function queryResource(resourceType, params = {}) {
   return resources;
 }
 
+/**
+ * Retrieves the relevant resources with given parameters
+ *
+ * @param {Array} types
+ * @param {Object} params
+ */
 export async function getResources(types, params = {}) {
   let resources = [];
 
@@ -81,6 +107,12 @@ export async function getResources(types, params = {}) {
   return resources;
 }
 
+/**
+ * Retrieves a specific resource
+ *
+ * @param {String} type
+ * @param {Number|String} id
+ */
 export async function getResourceDetails(type, id) {
   const res = await instance.get(`/${type}/${id}`);
   return res.data;
