@@ -1,6 +1,24 @@
 <template>
   <div>
-    <b-table striped hover :items="items" :fields="fields">
+    <b-table striped hover :items="resources" :fields="fields">
+      <template slot="type" slot-scope="data">
+        <icon class="fa-icon"
+              placement="topright"
+              v-b-popover.hover="TYPES.BOOK"
+              v-if="data.item.type === TYPES.BOOK"
+              name="book"></icon>
+        <icon class="fa-icon"
+              placement="topright"
+              v-b-popover.hover="TYPES.CHARACTER"
+              v-if="data.item.type === TYPES.CHARACTER"
+              name="user"></icon>
+        <icon class="fa-icon"
+              placement="topright"
+              v-b-popover.hover="TYPES.HOUSE"
+              v-if="data.item.type === TYPES.HOUSE"
+              name="archway"></icon>
+      </template>
+
       <template slot="name" slot-scope="data">
         <div v-if="data.item.name !== ''" v-text="data.item.name"></div>
         <div v-if="data.item.aliases">
@@ -28,35 +46,39 @@
       </template>
 
       <template slot="link" slot-scope="data">
-        <b-link
+        <b-button
+          variant="outline-secondary"
           :to="{ name: 'resource-details', params: { type: data.item.type, id: data.item.id } }">
           More
-        </b-link>
+        </b-button>
       </template>
     </b-table>
-    <b-alert :show="items.length === 0" variant="warning">No data to show.</b-alert>
+    <b-alert :show="resources.length === 0" variant="warning">No data to show.</b-alert>
   </div>
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
 import { TYPES } from '@/api';
 
 export default {
   name: 'ResourceTable',
-  props: {
-    items: Array,
-  },
   data() {
     return {
       search: '',
       TYPES,
       fields: [
+        { key: 'type', sortable: true },
         { key: 'name', sortable: true },
         { key: 'details', sortable: true },
-        { key: 'type', sortable: true },
-        { key: 'link', sortable: false },
+        { key: 'link', sortable: false, label: '' },
       ],
     };
+  },
+  computed: {
+    ...mapGetters([
+      'resources',
+    ]),
   },
 };
 </script>
