@@ -9,6 +9,7 @@ import '@/plugins/vuex';
 import '@/plugins/router';
 import '@/plugins/bootstrap-vue';
 import '@/plugins/progress';
+import '@/plugins/icons';
 
 import router from '@/router';
 
