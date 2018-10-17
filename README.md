@@ -1,4 +1,4 @@
-# ice-and-fire-vue-client
+# Vue client - Ice and Fire
 
 > Client app that uses the API of anapioficeandfire.com
 
