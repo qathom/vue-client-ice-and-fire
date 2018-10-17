@@ -44,3 +44,9 @@
 .filters-container {
   margin-bottom: $spacer;
 }
+
+@include media-breakpoint-down(sm) {
+  .search-button {
+    width: 100%;
+  }
+}

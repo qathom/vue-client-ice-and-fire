@@ -19,8 +19,9 @@
             </div>
           </b-form-checkbox>
         </div>
-        <div class="col-sm-3">
+        <div class="col-sm-3 mt-3 mt-sm-0">
           <b-button variant="primary"
+                    class="search-button"
                     :dismiss="loading"
                     @click.prevent="fetchData">
                     Search
